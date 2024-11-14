@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animal Picture Display</title>
+  <style>
+    #animalImage {
+      margin-top: 20px;
+      width: 300px;
+      height: 200px;
+      object-fit: cover;
+      border: 2px solid #000;
+      display: none; /* Initially hidden */
+    }
+    .button-container {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Select an Animal to See Its Picture</h2>
+  
+  <div class="button-container">
+    <button onclick="displayAnimalImage('cat')">Cat</button>
+    <button onclick="displayAnimalImage('dog')">Dog</button>
+    <button onclick="displayAnimalImage('lion')">Lion</button>
+    <button onclick="displayAnimalImage('elephant')">Elephant</button>
+  </div>
+
+  <img id="animalImage" src="" alt="Animal Image">
+
+  <script>
+    function displayAnimalImage(animal) {
+      const animalImage = document.getElementById("animalImage");
+
+      // Set the image source based on the animal selected
+      switch(animal) {
+        case 'cat':
+          animalImage.src = "./src/cat.png";
+          break;
+        case 'dog':
+          animalImage.src = "./src/dog.png";
+          break;
+        case 'lion':
+          animalImage.src = "./src/lion.png";
+          break;
+        case 'elephant':
+          animalImage.src = "./src/elephant.png";
+          break;
+        default:
+          animalImage.src = "";
+      }
+
+      // Display the image if a valid source is set
+      if (animalImage.src) {
+        animalImage.style.display = "block";
+      } else {
+        animalImage.style.display = "none"; // Hide if no valid animal is selected
+      }
+    }
+  </script>
+
+</body>
+</html>

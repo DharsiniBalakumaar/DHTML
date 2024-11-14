@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #todo-app {
+            width: 300px;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        #new-item {
+            width: calc(100% - 24px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        #add-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        #add-btn:hover {
+            background-color: #218838;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 5px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+        li.done {
+            text-decoration: line-through;
+            color: #888;
+        }
+        .delete-btn {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 5px 8px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div id="todo-app">
+        <h2>To-Do List</h2>
+        <input type="text" id="new-item" placeholder="Add a new item...">
+        <button id="add-btn">Add Item</button>
+        <ul id="todo-list"></ul>
+    </div>
+
+    <script>
+        // Get references to DOM elements
+        const addItemInput = document.getElementById('new-item');
+        const addBtn = document.getElementById('add-btn');
+        const todoList = document.getElementById('todo-list');
+
+        // Function to add a new item to the list
+        addBtn.addEventListener('click', function() {
+            const itemText = addItemInput.value.trim();
+            if (itemText !== "") {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    ${itemText}
+                    <button class="delete-btn">X</button>
+                `;
+
+                // Toggle 'done' state on click
+                listItem.addEventListener('click', function() {
+                    listItem.classList.toggle('done');
+                });
+
+                // Remove item when delete button is clicked
+                listItem.querySelector('.delete-btn').addEventListener('click', function(e) {
+                    e.stopPropagation(); // Prevent the 'done' toggle
+                    listItem.remove();
+                });
+
+                // Append the new item to the list
+                todoList.appendChild(listItem);
+
+                // Clear the input field
+                addItemInput.value = "";
+            }
+        });
+    </script>
+</body>
+</html>

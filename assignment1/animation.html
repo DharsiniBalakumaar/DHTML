@@ -1,0 +1,21 @@
+<div id="box" style="width:50px; height:50px; background:red; position:absolute;"></div>
+<button style="margin-top: 60px;" onclick="moveBox()">Move Box</button>
+
+<script>
+  function moveBox() {
+    let box = document.getElementById("box");
+    let position = 0;
+
+    // Get the width of the viewport minus the box width
+    let maxPosition = window.innerWidth - box.offsetWidth;
+
+    let interval = setInterval(() => {
+      if (position >= maxPosition) {
+        clearInterval(interval); // Stop the animation when the box reaches the edge
+      } else {
+        position++;
+        box.style.left = position + "px";
+      }
+    }, 5);
+  }
+</script>
